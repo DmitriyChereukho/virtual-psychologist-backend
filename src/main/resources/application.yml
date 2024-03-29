@@ -6,6 +6,6 @@ spring:
     banner-mode: off
 
   datasource:
-    url: jdbc:postgresql://localhost:3306/virtual_psychologist
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
