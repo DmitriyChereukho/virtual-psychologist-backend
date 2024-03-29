@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: virtual-psychologist-backend
+
+  main:
+    banner-mode: off
+
+  datasource:
+    url: jdbc:postgresql://localhost:3306/virtual_psychologist
+    username: postgres
+    password: postgres
