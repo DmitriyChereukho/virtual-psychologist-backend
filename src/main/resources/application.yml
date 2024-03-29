@@ -9,3 +9,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
+
+jwt:
+  key: bcb37123b6cb7891263cb97126cb978123
+  access-token-expiration: 2592000000
