@@ -2,8 +2,8 @@ package ru.hse.virtual.psychologist.backend.controllers
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
-import ru.hse.virtual.psychologist.backend.models.AuthenticationRequest
-import ru.hse.virtual.psychologist.backend.models.AuthenticationResponse
+import ru.hse.virtual.psychologist.backend.dtos.AuthenticationRequest
+import ru.hse.virtual.psychologist.backend.dtos.AuthenticationResponse
 import ru.hse.virtual.psychologist.backend.services.AuthenticationService
 
 @RestController

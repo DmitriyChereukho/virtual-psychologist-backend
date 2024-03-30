@@ -1,4 +1,4 @@
-package ru.hse.virtual.psychologist.backend.models
+package ru.hse.virtual.psychologist.backend.dtos
 
 data class AuthenticationRequest(
     val email: String,

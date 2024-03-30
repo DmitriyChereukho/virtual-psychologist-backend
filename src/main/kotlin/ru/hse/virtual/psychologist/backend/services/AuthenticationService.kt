@@ -4,8 +4,8 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.stereotype.Service
 import ru.hse.virtual.psychologist.backend.config.JwtProperties
-import ru.hse.virtual.psychologist.backend.models.AuthenticationRequest
-import ru.hse.virtual.psychologist.backend.models.AuthenticationResponse
+import ru.hse.virtual.psychologist.backend.dtos.AuthenticationRequest
+import ru.hse.virtual.psychologist.backend.dtos.AuthenticationResponse
 import java.util.*
 
 @Service
