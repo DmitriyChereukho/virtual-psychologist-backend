@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 import ru.hse.virtual.psychologist.backend.data.entities.User
 import ru.hse.virtual.psychologist.backend.data.repositories.UserRepository
-import ru.hse.virtual.psychologist.backend.dtos.UserDto
 
 @Service
 class UserService(private val userRepository: UserRepository, private val encoder: PasswordEncoder) {
