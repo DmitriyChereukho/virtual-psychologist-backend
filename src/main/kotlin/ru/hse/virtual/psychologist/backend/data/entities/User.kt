@@ -4,6 +4,7 @@ import jakarta.persistence.*
 import lombok.Builder
 import lombok.Data
 import ru.hse.virtual.psychologist.backend.enums.Role
+import java.time.LocalDate
 import java.util.*
 
 
@@ -30,8 +31,8 @@ data class User(
     @Column(unique = true, name = "phone_num")
     val phoneNum: String,
 
-    @Column(name = "age")
-    val age: Int,
+    @Column(name = "birthday")
+    val birthday: LocalDate,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
