@@ -13,10 +13,19 @@ class UserService(private val userRepository: UserRepository, private val encode
         return userRepository.findAll().find { it.email == email }
     }
 
+    fun findByPhoneNum(phoneNum: String): User? {
+        return userRepository.findAll().find { it.phoneNum == phoneNum }
+    }
+
     fun createUser(user: User) : User {
         if(findByEmail(user.email) != null) {
-            throw ResponseStatusException(HttpStatus.BAD_REQUEST, "User with email ${user.email} already exists")
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST, "432")
         }
+
+        if(findByPhoneNum(user.phoneNum) != null) {
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST, "433")
+        }
+
         return userRepository.save(user.copy(password = encoder.encode(user.password)))
     }
 }
