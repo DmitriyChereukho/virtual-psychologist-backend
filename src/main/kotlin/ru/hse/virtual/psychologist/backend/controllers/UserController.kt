@@ -9,13 +9,13 @@ import ru.hse.virtual.psychologist.backend.mappers.UserDtoToUserEntityMapper
 import ru.hse.virtual.psychologist.backend.services.UserService
 
 @RestController
+@CrossOrigin(origins = ["http://localhost:3000"], allowCredentials = "true")
 class UserController(
     private val userService: UserService,
     private val userDtoToUserEntityMapper: UserDtoToUserEntityMapper
 ) {
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
-    @CrossOrigin(origins = ["http://localhost:3000"], allowCredentials = "true")
     fun signup(@RequestBody user: UserDto): ResponseEntity<UserDto> {
         try {
             val createdUser = userService.createUser(userDtoToUserEntityMapper.map(user))
