@@ -15,7 +15,7 @@ class UserController(
 ) {
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
-    @CrossOrigin
+    @CrossOrigin(origins = ["http://localhost:3000"], allowCredentials = "true")
     fun signup(@RequestBody user: UserDto): ResponseEntity<UserDto> {
         try {
             val createdUser = userService.createUser(userDtoToUserEntityMapper.map(user))

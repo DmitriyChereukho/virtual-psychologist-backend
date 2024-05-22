@@ -7,7 +7,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class BirthdayDeserializer : JsonDeserializer<LocalDate>() {
-    private val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+    private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext?): LocalDate {
         val date = p.text

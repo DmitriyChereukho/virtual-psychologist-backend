@@ -12,6 +12,7 @@ class AuthController(@Autowired private val authenticationService: Authenticatio
 
     @PostMapping("")
     @ResponseBody
+    @CrossOrigin(origins = ["http://localhost:3000"], allowCredentials = "true")
     fun authenticate(@RequestBody authRequest: AuthenticationRequest) : AuthenticationResponse {
         return authenticationService.authenticate(authRequest)
     }
