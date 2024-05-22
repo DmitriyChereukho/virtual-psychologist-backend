@@ -15,12 +15,12 @@ class UserController(
 ) {
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
+    @CrossOrigin
     fun signup(@RequestBody user: UserDto): ResponseEntity<UserDto> {
         try {
             val createdUser = userService.createUser(userDtoToUserEntityMapper.map(user))
             return ResponseEntity.ok(userDtoToUserEntityMapper.map(createdUser))
-        }
-        catch (e: ResponseStatusException) {
+        } catch (e: ResponseStatusException) {
             return ResponseEntity.status(e.reason!!.toInt()).build()
         }
     }
