@@ -7,7 +7,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class BirthdaySerializer: JsonSerializer<LocalDate>() {
-    private val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+    private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
     override fun serialize(value: LocalDate, gen: JsonGenerator, serializers: SerializerProvider) {
         gen.writeString(value.format(formatter))
