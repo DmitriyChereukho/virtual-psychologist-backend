@@ -13,6 +13,6 @@ class UserInfoController(
 ) {
     @GetMapping("/info")
     fun getUserInfo() : UserInfoDto {
-        return userInfoService.getInfo();
+        return userInfoService.getInfo()
     }
 }
