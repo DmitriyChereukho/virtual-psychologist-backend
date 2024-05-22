@@ -9,6 +9,7 @@ import ru.hse.virtual.psychologist.backend.mappers.UserDtoToUserEntityMapper
 import ru.hse.virtual.psychologist.backend.services.UserService
 
 @RestController
+@CrossOrigin(origins = ["http://localhost:3000"], allowCredentials = "true")
 class UserController(
     private val userService: UserService,
     private val userDtoToUserEntityMapper: UserDtoToUserEntityMapper
@@ -19,8 +20,7 @@ class UserController(
         try {
             val createdUser = userService.createUser(userDtoToUserEntityMapper.map(user))
             return ResponseEntity.ok(userDtoToUserEntityMapper.map(createdUser))
-        }
-        catch (e: ResponseStatusException) {
+        } catch (e: ResponseStatusException) {
             return ResponseEntity.status(e.reason!!.toInt()).build()
         }
     }
