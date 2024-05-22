@@ -10,11 +10,9 @@ import ru.hse.virtual.psychologist.backend.services.AuthenticationService
 @RequestMapping("/login")
 @CrossOrigin(origins = ["http://localhost:3000"], allowCredentials = "true")
 class AuthController(@Autowired private val authenticationService: AuthenticationService) {
-
     @PostMapping("")
     @ResponseBody
     fun authenticate(@RequestBody authRequest: AuthenticationRequest) : AuthenticationResponse {
         return authenticationService.authenticate(authRequest)
     }
-
 }
