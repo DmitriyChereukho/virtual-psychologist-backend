@@ -10,6 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 class CrossOriginConfig : WebMvcConfigurer {
     @Override
     override fun addCorsMappings(registry: CorsRegistry) {
-        registry.addMapping("/**").allowedOrigins("http://localhost:3000")
+        registry.addMapping("/**")
+            .allowedOrigins("http://localhost:3000")
+            .allowCredentials(true)
     }
 }
