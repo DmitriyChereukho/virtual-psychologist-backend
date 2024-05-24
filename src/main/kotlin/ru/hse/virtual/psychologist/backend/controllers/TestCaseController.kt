@@ -11,7 +11,6 @@ import ru.hse.virtual.psychologist.backend.services.TestingSystemService
 
 @RestController
 @RequestMapping("/test-case")
-@CrossOrigin(origins = ["http://localhost:3000"], allowCredentials = "true")
 class TestCaseController(private val testingSystemService: TestingSystemService) {
     @PutMapping("/refresh")
     fun refreshTestCases(): ResponseEntity<List<TestCase>> {
