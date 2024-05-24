@@ -8,7 +8,6 @@ import ru.hse.virtual.psychologist.backend.services.AuthenticationService
 
 @RestController
 @RequestMapping("/login")
-@CrossOrigin(origins = ["http://localhost:3000"], allowCredentials = "true")
 class AuthController(@Autowired private val authenticationService: AuthenticationService) {
     @PostMapping("")
     @ResponseBody
