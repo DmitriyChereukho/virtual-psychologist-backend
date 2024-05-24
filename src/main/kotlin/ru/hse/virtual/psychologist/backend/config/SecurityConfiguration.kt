@@ -15,8 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 class SecurityConfiguration(private val authenticationProvider: AuthenticationProvider) {
     @Bean
     fun securityFilterChain(http: HttpSecurity, jwtFilter: JwtFilter): DefaultSecurityFilterChain {
-        return http.csrf { it.disable() }
-            .authorizeHttpRequests {
+        http.authorizeHttpRequests {
                 it.requestMatchers("/login")
                     .permitAll()
                     .requestMatchers(HttpMethod.POST, "/signup")
@@ -27,6 +26,8 @@ class SecurityConfiguration(private val authenticationProvider: AuthenticationPr
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)
-            .build()
+            .csrf { it.disable() }
+
+        return http.build()
     }
 }
