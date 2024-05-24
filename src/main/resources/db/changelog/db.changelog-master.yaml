@@ -3,3 +3,9 @@ databaseChangeLog:
   - include:
       file: users.sql
       relativeToChangelogFile: true
+  - include:
+      file: test_cases.sql
+      relativeToChangelogFile: true
+  - include:
+      file: test_cases_fix1.sql
+      relativeToChangelogFile: true
