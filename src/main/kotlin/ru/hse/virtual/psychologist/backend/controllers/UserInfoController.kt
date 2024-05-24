@@ -9,7 +9,6 @@ import ru.hse.virtual.psychologist.backend.services.UserInfoService
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = ["http://localhost:3000"], allowCredentials = "true")
 class UserInfoController(
     private val userInfoService: UserInfoService
 ) {
