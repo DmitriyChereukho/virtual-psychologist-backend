@@ -28,7 +28,13 @@ class AuthenticationService(
             userDetails = user,
             expirationDate = Date(System.currentTimeMillis() + jwtProperties.accessTokenExpiration)
         )
-        return AuthenticationResponse(accessToken)
+        return AuthenticationResponse(
+            accessToken, when (user.authorities.first().authority) {
+                "ROLE_ADMIN" -> 5150
+                "ROLE_CLIENT" -> 2001
+                else -> 0
+            }
+        )
     }
 
 }
