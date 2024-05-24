@@ -21,6 +21,8 @@ class SecurityConfiguration(private val authenticationProvider: AuthenticationPr
                     .permitAll()
                     .requestMatchers(HttpMethod.POST, "/signup")
                     .permitAll()
+                    .requestMatchers(HttpMethod.POST,"/problems")
+                    .hasRole("ADMIN")
                     .anyRequest()
                     .fullyAuthenticated()
             }
