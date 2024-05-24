@@ -9,9 +9,9 @@ import java.time.LocalDate
 data class UserInfoDto (
     val name: String,
     val surname: String,
-    val patronymic: String,
+    val patronymic: String?,
     val email: String,
-    val phoneNum: String,
+    val phoneNum: String?,
 
     @JsonDeserialize(using = BirthdayDeserializer::class)
     @JsonSerialize(using = BirthdaySerializer::class)
