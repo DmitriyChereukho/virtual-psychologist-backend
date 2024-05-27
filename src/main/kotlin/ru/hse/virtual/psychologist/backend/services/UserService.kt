@@ -24,16 +24,29 @@ class UserService(
         return userRepository.findAll().find { it.phoneNum == phoneNum }
     }
 
-    fun createUser(user: User) : User {
-        if(findByEmail(user.email) != null) throw EmailExistsException()
+    fun createUser(user: User): User {
+        if (findByEmail(user.email) != null) throw EmailExistsException()
 
-        if(findByPhoneNum(user.phoneNum) != null) throw PhoneExistsException()
+        if (findByPhoneNum(user.phoneNum) != null) throw PhoneExistsException()
 
         return userRepository.save(user.copy(password = encoder.encode(user.password)))
     }
 
-    fun getInfo() : UserInfoDto {
+    fun updateUser(user: User): User {
+        val oldUser = findByEmail(user.email) ?: throw IllegalArgumentException("User not found")
+
+        return userRepository.save(
+            oldUser.copy(
+                name = user.name,
+                surname = user.surname,
+                patronymic = user.patronymic,
+                birthday = user.birthday
+            ))
+    }
+
+    fun getInfo(): UserInfoDto {
         return userEntityToUserInfoDto.map(
-            findByEmail(SecurityContextHolder.getContext().authentication.name))
+            findByEmail(SecurityContextHolder.getContext().authentication.name)
+        )
     }
 }
