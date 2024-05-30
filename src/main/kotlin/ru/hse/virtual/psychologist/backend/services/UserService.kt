@@ -5,9 +5,11 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import ru.hse.virtual.psychologist.backend.data.entities.User
 import ru.hse.virtual.psychologist.backend.data.repositories.UserRepository
+import ru.hse.virtual.psychologist.backend.dtos.UserInfoUpdateRequest
 import ru.hse.virtual.psychologist.backend.dtos.UserInfoDto
 import ru.hse.virtual.psychologist.backend.exceptions.email.EmailExistsException
 import ru.hse.virtual.psychologist.backend.exceptions.phone.PhoneExistsException
+import ru.hse.virtual.psychologist.backend.exceptions.user.not.found.UserNotFoundException
 import ru.hse.virtual.psychologist.backend.mappers.UserEntityToUserInfoDtoImpl
 
 @Service
@@ -33,18 +35,20 @@ class UserService(
     }
 
     // TODO Реализовать обновление информации о пользователе
-    fun updateUser(user: User) {
+    fun updateUser(updRequest: UserInfoUpdateRequest) {
         // TODO Сделать обработку ошибки на случай если такого пользователя нет
-        val oldUser = findByEmail(user.email) ?: throw IllegalArgumentException("User not found")
+        val oldUser = findByEmail(
+            SecurityContextHolder.getContext().authentication.name
+        ) ?: throw UserNotFoundException()
 
-        userEntityToUserInfoDto.map(
-            userRepository.save(
+        userRepository.save(
             oldUser.copy(
-                name = user.name,
-                surname = user.surname,
-                patronymic = user.patronymic,
-                birthday = user.birthday
-            )))
+                name = updRequest.name,
+                surname = updRequest.surname,
+                patronymic = updRequest.patronymic,
+                birthday = updRequest.birthday
+            )
+        )
 
         // TODO Девочки сказали, что им ничего не надо возвращать
         return
