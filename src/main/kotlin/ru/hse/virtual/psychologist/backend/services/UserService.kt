@@ -34,9 +34,7 @@ class UserService(
         return userRepository.save(user.copy(password = encoder.encode(user.password)))
     }
 
-    // TODO Реализовать обновление информации о пользователе
     fun updateUser(updRequest: UserInfoUpdateRequest) {
-        // TODO Сделать обработку ошибки на случай если такого пользователя нет
         val oldUser = findByEmail(
             SecurityContextHolder.getContext().authentication.name
         ) ?: throw UserNotFoundException()
@@ -50,7 +48,6 @@ class UserService(
             )
         )
 
-        // TODO Девочки сказали, что им ничего не надо возвращать
         return
     }
 

@@ -15,7 +15,6 @@ class UserController(
         return userService.getInfo()
     }
 
-    // TODO Должен запрашивать информацию на обновление
     @PutMapping("/update")
     fun updateUserInfo(@RequestBody updRequest: UserInfoUpdateRequest) {
         return userService.updateUser(updRequest)
