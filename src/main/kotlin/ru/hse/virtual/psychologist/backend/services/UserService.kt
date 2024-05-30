@@ -32,16 +32,22 @@ class UserService(
         return userRepository.save(user.copy(password = encoder.encode(user.password)))
     }
 
-    fun updateUser(user: User): User {
+    // TODO Реализовать обновление информации о пользователе
+    fun updateUser(user: User) {
+        // TODO Сделать обработку ошибки на случай если такого пользователя нет
         val oldUser = findByEmail(user.email) ?: throw IllegalArgumentException("User not found")
 
-        return userRepository.save(
+        userEntityToUserInfoDto.map(
+            userRepository.save(
             oldUser.copy(
                 name = user.name,
                 surname = user.surname,
                 patronymic = user.patronymic,
                 birthday = user.birthday
-            ))
+            )))
+
+        // TODO Девочки сказали, что им ничего не надо возвращать
+        return
     }
 
     fun getInfo(): UserInfoDto {
