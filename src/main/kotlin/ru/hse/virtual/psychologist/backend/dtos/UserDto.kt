@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import lombok.Builder
 import lombok.Data
-import ru.hse.virtual.psychologist.backend.deserializers.BirthdayDeserializer
-import ru.hse.virtual.psychologist.backend.serializers.BirthdaySerializer
+import ru.hse.virtual.psychologist.backend.serialization.deserializers.BirthdayDeserializer
+import ru.hse.virtual.psychologist.backend.serialization.serializers.BirthdaySerializer
 import java.time.LocalDate
 
 @Data

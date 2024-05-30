@@ -1,4 +1,4 @@
-package ru.hse.virtual.psychologist.backend.deserializers
+package ru.hse.virtual.psychologist.backend.serialization.deserializers
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext

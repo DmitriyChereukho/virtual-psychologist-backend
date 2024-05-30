@@ -1,4 +1,4 @@
-package ru.hse.virtual.psychologist.backend.serializers
+package ru.hse.virtual.psychologist.backend.serialization.serializers
 
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.JsonSerializer
