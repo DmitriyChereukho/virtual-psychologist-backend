@@ -5,9 +5,11 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import ru.hse.virtual.psychologist.backend.data.entities.User
 import ru.hse.virtual.psychologist.backend.data.repositories.UserRepository
+import ru.hse.virtual.psychologist.backend.dtos.UserInfoUpdateRequest
 import ru.hse.virtual.psychologist.backend.dtos.UserInfoDto
 import ru.hse.virtual.psychologist.backend.exceptions.email.EmailExistsException
 import ru.hse.virtual.psychologist.backend.exceptions.phone.PhoneExistsException
+import ru.hse.virtual.psychologist.backend.exceptions.user.not.found.UserNotFoundException
 import ru.hse.virtual.psychologist.backend.mappers.UserEntityToUserInfoDtoImpl
 
 @Service
@@ -24,16 +26,37 @@ class UserService(
         return userRepository.findAll().find { it.phoneNum == phoneNum }
     }
 
-    fun createUser(user: User) : User {
-        if(findByEmail(user.email) != null) throw EmailExistsException()
+    fun createUser(user: User): User {
+        if (findByEmail(user.email) != null) throw EmailExistsException()
 
-        if(findByPhoneNum(user.phoneNum) != null) throw PhoneExistsException()
+        if (findByPhoneNum(user.phoneNum) != null) throw PhoneExistsException()
 
         return userRepository.save(user.copy(password = encoder.encode(user.password)))
     }
 
-    fun getInfo() : UserInfoDto {
+    // TODO Реализовать обновление информации о пользователе
+    fun updateUser(updRequest: UserInfoUpdateRequest) {
+        // TODO Сделать обработку ошибки на случай если такого пользователя нет
+        val oldUser = findByEmail(
+            SecurityContextHolder.getContext().authentication.name
+        ) ?: throw UserNotFoundException()
+
+        userRepository.save(
+            oldUser.copy(
+                name = updRequest.name,
+                surname = updRequest.surname,
+                patronymic = updRequest.patronymic,
+                birthday = updRequest.birthday
+            )
+        )
+
+        // TODO Девочки сказали, что им ничего не надо возвращать
+        return
+    }
+
+    fun getInfo(): UserInfoDto {
         return userEntityToUserInfoDto.map(
-            findByEmail(SecurityContextHolder.getContext().authentication.name))
+            findByEmail(SecurityContextHolder.getContext().authentication.name)
+        )
     }
 }

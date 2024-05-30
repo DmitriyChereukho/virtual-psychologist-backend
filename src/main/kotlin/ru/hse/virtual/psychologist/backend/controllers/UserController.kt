@@ -1,8 +1,7 @@
 package ru.hse.virtual.psychologist.backend.controllers
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import ru.hse.virtual.psychologist.backend.dtos.UserInfoUpdateRequest
 import ru.hse.virtual.psychologist.backend.dtos.UserInfoDto
 import ru.hse.virtual.psychologist.backend.services.UserService
 
@@ -12,7 +11,13 @@ class UserController(
     private val userService: UserService
 ) {
     @GetMapping("/info")
-    fun getUserInfo() : UserInfoDto {
+    fun getUserInfo(): UserInfoDto {
         return userService.getInfo()
+    }
+
+    // TODO Должен запрашивать информацию на обновление
+    @PutMapping("/update")
+    fun updateUserInfo(@RequestBody updRequest: UserInfoUpdateRequest) {
+        return userService.updateUser(updRequest)
     }
 }
