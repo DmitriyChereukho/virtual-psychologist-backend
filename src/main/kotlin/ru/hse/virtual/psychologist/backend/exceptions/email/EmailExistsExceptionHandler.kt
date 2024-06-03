@@ -11,15 +11,16 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 class EmailExistsExceptionHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(EmailExistsException::class)
-    protected fun handleEmailExistsException() : ResponseEntity<EmailExceptionJson> {
+    protected fun handleEmailExistsException(): ResponseEntity<EmailExceptionJson> {
         return ResponseEntity(
-            EmailExceptionJson("Conflict", "There already is an account registered on this email."), HttpStatus.CONFLICT)
+            EmailExceptionJson("Conflict", "There already is an account registered on this email."), HttpStatus.CONFLICT
+        )
     }
 
     @Data
     @AllArgsConstructor
-    data class EmailExceptionJson (
-        val error : String,
-        val message : String
+    data class EmailExceptionJson(
+        val error: String,
+        val message: String
     )
 }

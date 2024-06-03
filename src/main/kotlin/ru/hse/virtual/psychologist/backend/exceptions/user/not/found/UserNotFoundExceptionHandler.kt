@@ -11,17 +11,20 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 class UserNotFoundExceptionHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(UserNotFoundException::class)
-    protected fun handleUserNotFoundException() : ResponseEntity<UserNotFoundJson> {
-        return ResponseEntity(UserNotFoundJson(
-            "Not found",
-            "There is no user with this email"),
-            HttpStatus.NOT_FOUND)
+    protected fun handleUserNotFoundException(): ResponseEntity<UserNotFoundJson> {
+        return ResponseEntity(
+            UserNotFoundJson(
+                "Not found",
+                "There is no user with this email"
+            ),
+            HttpStatus.NOT_FOUND
+        )
     }
 
     @Data
     @AllArgsConstructor
-    data class UserNotFoundJson (
-        val error : String,
-        val message : String
+    data class UserNotFoundJson(
+        val error: String,
+        val message: String
     )
 }

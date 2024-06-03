@@ -6,7 +6,7 @@ import ru.hse.virtual.psychologist.backend.deserializers.BirthdayDeserializer
 import ru.hse.virtual.psychologist.backend.serializers.BirthdaySerializer
 import java.time.LocalDate
 
-data class UserInfoDto (
+data class UserInfoDto(
     val name: String,
     val surname: String,
     val patronymic: String?,

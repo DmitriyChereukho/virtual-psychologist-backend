@@ -6,5 +6,5 @@ import ru.hse.virtual.psychologist.backend.dtos.UserInfoDto
 
 @Mapper(componentModel = "spring")
 interface UserEntityToUserInfoDto {
-    fun map(user: User?) : UserInfoDto
+    fun map(user: User?): UserInfoDto
 }

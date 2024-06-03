@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.SerializerProvider
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class BirthdaySerializer: JsonSerializer<LocalDate>() {
+class BirthdaySerializer : JsonSerializer<LocalDate>() {
     private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
     override fun serialize(value: LocalDate, gen: JsonGenerator, serializers: SerializerProvider) {

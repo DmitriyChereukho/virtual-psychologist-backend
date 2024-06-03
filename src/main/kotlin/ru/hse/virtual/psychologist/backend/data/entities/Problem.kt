@@ -7,6 +7,7 @@ import jakarta.persistence.Table
 import lombok.Builder
 import lombok.Data
 import java.util.*
+
 @Data
 @Entity
 @Table(name = "problems")

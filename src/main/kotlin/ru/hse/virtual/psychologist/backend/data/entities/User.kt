@@ -7,7 +7,6 @@ import ru.hse.virtual.psychologist.backend.enums.Role
 import java.time.LocalDate
 import java.util.*
 
-
 @Data
 @Entity
 @Table(name = "users")

@@ -11,7 +11,7 @@ import ru.hse.virtual.psychologist.backend.services.AuthenticationService
 class AuthController(@Autowired private val authenticationService: AuthenticationService) {
     @PostMapping("")
     @ResponseBody
-    fun authenticate(@RequestBody authRequest: AuthenticationRequest) : AuthenticationResponse {
+    fun authenticate(@RequestBody authRequest: AuthenticationRequest): AuthenticationResponse {
         return authenticationService.authenticate(authRequest)
     }
 }
