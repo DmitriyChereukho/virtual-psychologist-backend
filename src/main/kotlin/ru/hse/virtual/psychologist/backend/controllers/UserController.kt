@@ -1,26 +1,22 @@
 package ru.hse.virtual.psychologist.backend.controllers
 
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.server.ResponseStatusException
-import ru.hse.virtual.psychologist.backend.dtos.UserDto
-import ru.hse.virtual.psychologist.backend.mappers.UserDtoToUserEntityMapper
+import ru.hse.virtual.psychologist.backend.dtos.UserInfoUpdateRequest
+import ru.hse.virtual.psychologist.backend.dtos.UserInfoDto
 import ru.hse.virtual.psychologist.backend.services.UserService
 
 @RestController
+@RequestMapping("/user")
 class UserController(
-    private val userService: UserService,
-    private val userDtoToUserEntityMapper: UserDtoToUserEntityMapper
+    private val userService: UserService
 ) {
-    @PostMapping("/signup")
-    @ResponseStatus(HttpStatus.CREATED)
-    fun signup(@RequestBody user: UserDto): ResponseEntity<UserDto> {
-        try {
-            val createdUser = userService.createUser(userDtoToUserEntityMapper.map(user))
-            return ResponseEntity.ok(userDtoToUserEntityMapper.map(createdUser))
-        } catch (e: ResponseStatusException) {
-            return ResponseEntity.status(e.reason!!.toInt()).build()
-        }
+    @GetMapping("/info")
+    fun getUserInfo(): UserInfoDto {
+        return userService.getInfo()
+    }
+
+    @PutMapping("/update")
+    fun updateUserInfo(@RequestBody updRequest: UserInfoUpdateRequest) {
+        return userService.updateUser(updRequest)
     }
 }

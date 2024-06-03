@@ -15,7 +15,7 @@ class TestingSystemService(private val testCaseRepository: TestCaseRepository) {
             .uri("https://9ww9.ru/api/testCases")
             .header(
                 "Authorization",
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVnSGZHOUYiLCJ0b2tlbiI6IkpQYkl1cm92dHQvSE5oY2xkN1REd0FWSk82UDRMb3BQQ3F0OHpXWVhzQ2hiOFdLOG9oVVBrUWdHOUUvRDdQWEQiLCJpYXQiOjE3MTU1MzkwMTB9.js6b_XCmv1zAJKmy12ahTM-9iRe6g9wSQw4cN656j74"
+                "Bearer " + System.getenv("TESTING_SYSTEM_KEY")
             )
             .retrieve()
             .bodyToFlux(TestCase::class.java)
