@@ -10,7 +10,7 @@ import java.time.LocalDate
 
 @Data
 @Builder
-data class UserDto (
+data class UserDto(
     val name: String,
     val surname: String,
     val patronymic: String,

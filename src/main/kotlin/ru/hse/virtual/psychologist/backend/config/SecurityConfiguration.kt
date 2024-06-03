@@ -16,15 +16,17 @@ class SecurityConfiguration(private val authenticationProvider: AuthenticationPr
     @Bean
     fun securityFilterChain(http: HttpSecurity, jwtFilter: JwtFilter): DefaultSecurityFilterChain {
         http.authorizeHttpRequests {
-                it.requestMatchers("/login")
-                    .permitAll()
-                    .requestMatchers(HttpMethod.POST, "/signup")
-                    .permitAll()
-                    .requestMatchers(HttpMethod.POST,"/problems")
-                    .hasRole("ADMIN")
-                    .anyRequest()
-                    .fullyAuthenticated()
-            }
+            it.requestMatchers("/login")
+                .permitAll()
+                .requestMatchers(HttpMethod.POST, "/signup")
+                .permitAll()
+                .requestMatchers(HttpMethod.POST, "/problems")
+                .hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/problems")
+                .permitAll()
+                .anyRequest()
+                .fullyAuthenticated()
+        }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)

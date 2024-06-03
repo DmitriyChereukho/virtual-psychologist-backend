@@ -11,17 +11,20 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 class PhoneExistsExceptionHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(PhoneExistsException::class)
-    protected fun handlePhoneExistsException() : ResponseEntity<PhoneExceptionJson> {
-        return ResponseEntity(PhoneExceptionJson(
-            "Conflict",
-            "There already is an account registered on this phone number."),
-            HttpStatus.CONFLICT)
+    protected fun handlePhoneExistsException(): ResponseEntity<PhoneExceptionJson> {
+        return ResponseEntity(
+            PhoneExceptionJson(
+                "Conflict",
+                "There already is an account registered on this phone number."
+            ),
+            HttpStatus.CONFLICT
+        )
     }
 
     @Data
     @AllArgsConstructor
     data class PhoneExceptionJson(
-        val error : String,
-        val message : String
+        val error: String,
+        val message: String
     )
 }

@@ -43,7 +43,6 @@ class JwtService(jwtProperties: JwtProperties) {
     }
 
     private fun getAllClaims(token: String): Claims {
-
         return Jwts.parser()
             .verifyWith(secretKey)
             .build()
