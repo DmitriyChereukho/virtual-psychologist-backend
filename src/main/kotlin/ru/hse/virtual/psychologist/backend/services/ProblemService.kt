@@ -5,6 +5,7 @@ import ru.hse.virtual.psychologist.backend.data.entities.Problem
 import ru.hse.virtual.psychologist.backend.data.repositories.ProblemRepository
 import ru.hse.virtual.psychologist.backend.data.repositories.TestCaseRepository
 import ru.hse.virtual.psychologist.backend.dtos.NewProblemDto
+import ru.hse.virtual.psychologist.backend.dtos.ProblemDto
 import java.util.*
 
 @Service
@@ -19,6 +20,7 @@ class ProblemService(
         }
         val problemEntity = Problem(
             name = problem.name,
+            description = problem.description,
             testCaseId = matchedTestCase.id,
             testCaseLink = problem.testCaseLink,
             formLink = problem.formLink,
@@ -29,5 +31,15 @@ class ProblemService(
 
     fun getProblems(): List<Problem> {
         return problemRepository.findAll()
+    }
+
+    fun getProblemById(id: UUID): ProblemDto {
+        val problem = problemRepository.findById(id).orElseThrow { IllegalArgumentException("Problem with id $id not found") }
+        return ProblemDto(
+            name = problem.name,
+            description = problem.description,
+            testCaseLink = problem.testCaseLink,
+            formLink = problem.formLink
+        )
     }
 }

@@ -16,6 +16,9 @@ data class Problem(
     @Column(name = "name")
     val name: String,
 
+    @Column(name = "description")
+    val description: String,
+
     @Column(name = "test_case_id")
     val testCaseId: String,
 
