@@ -7,6 +7,7 @@ import lombok.Data
 @Builder
 data class NewProblemDto(
     val name: String,
+    val description: String,
     val testCaseName: String,
     val testCaseLink: String,
     val formLink: String,

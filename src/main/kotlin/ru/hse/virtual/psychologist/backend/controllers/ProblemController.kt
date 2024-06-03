@@ -1,9 +1,11 @@
 package ru.hse.virtual.psychologist.backend.controllers
 
 import org.springframework.web.bind.annotation.*
+import ru.hse.virtual.psychologist.backend.dtos.CatalogProblemDto
 import ru.hse.virtual.psychologist.backend.dtos.NewProblemDto
 import ru.hse.virtual.psychologist.backend.dtos.ProblemDto
 import ru.hse.virtual.psychologist.backend.services.ProblemService
+import java.util.UUID
 
 @RestController
 @RequestMapping("/problems")
@@ -14,13 +16,17 @@ class ProblemController(private val problemService: ProblemService) {
     }
 
     @GetMapping
-    fun getProblems(): List<ProblemDto> {
+    fun getProblems(): List<CatalogProblemDto> {
         return problemService.getProblems().map {
-            ProblemDto(
+            CatalogProblemDto(
                 name = it.name,
-                testCaseLink = it.testCaseLink,
-                formLink = it.formLink
+                id = it.id
             )
         }
+    }
+
+    @GetMapping("/{id}")
+    fun getProblem(@PathVariable id: UUID): ProblemDto {
+        return problemService.getProblemById(id)
     }
 }
