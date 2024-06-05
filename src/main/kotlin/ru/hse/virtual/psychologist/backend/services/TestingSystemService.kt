@@ -18,7 +18,6 @@ import java.util.*
 @Service
 class TestingSystemService(
     private val testCaseRepository: TestCaseRepository,
-    private val problemRepository: ProblemRepository,
     private val problemService: ProblemService,
     private val userService: UserService
 ) {
