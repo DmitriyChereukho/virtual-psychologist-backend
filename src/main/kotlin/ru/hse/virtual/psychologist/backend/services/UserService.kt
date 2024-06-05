@@ -37,6 +37,7 @@ class UserService(
     }
 
     fun updateUser(updRequest: UserInfoUpdateRequest) {
+        //TODO Make it separated function
         val oldUser = findByEmail(
             SecurityContextHolder.getContext().authentication.name
         ) ?: throw UserNotFoundException()

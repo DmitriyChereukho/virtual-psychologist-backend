@@ -38,10 +38,12 @@ class ResultService(
         val user = userService.findByEmail(
             SecurityContextHolder.getContext().authentication.name
         ) ?: throw UserNotFoundException()
+        //TODO Exception handling
         val result = user.results.find { it.id == id } ?: throw IllegalArgumentException("Result not found")
         val problem = problemService.getProblemById(result.problemId)
         return ResultInfoDto(
             name = problem.name,
+            //TODO Exception handling
             createdAt = result.createdAt ?: throw IllegalArgumentException("Test has not been passed yet"),
             duration = result.duration ?: throw IllegalArgumentException("Test has not been passed yet"),
             nodes = result.nodes ?: throw IllegalArgumentException("Test has not been passed yet")

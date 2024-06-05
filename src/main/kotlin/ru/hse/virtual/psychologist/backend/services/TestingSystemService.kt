@@ -7,7 +7,6 @@ import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.server.ResponseStatusException
 import ru.hse.virtual.psychologist.backend.data.entities.Result
 import ru.hse.virtual.psychologist.backend.data.entities.TestCase
-import ru.hse.virtual.psychologist.backend.data.repositories.ProblemRepository
 import ru.hse.virtual.psychologist.backend.data.repositories.TestCaseRepository
 import ru.hse.virtual.psychologist.backend.dtos.ResultApiDto
 import ru.hse.virtual.psychologist.backend.exceptions.user.not.found.UserNotFoundException
@@ -56,6 +55,7 @@ class TestingSystemService(
         ) ?: throw UserNotFoundException()
 
         val resultDtoForCurrentUser = resultApiDtos?.find { it.email == user.email }
+            //TODO Exception handling
             ?: throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR)
 
         val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")

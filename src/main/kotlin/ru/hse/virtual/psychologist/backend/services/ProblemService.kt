@@ -17,6 +17,7 @@ class ProblemService(
     fun createProblem(problem: NewProblemDto) {
         val matchedTestCase = testCaseRepository.findAll().find { it.name == problem.testCaseName }
         if (matchedTestCase == null) {
+            //TODO Exception handling
             throw IllegalArgumentException("Test case with name ${problem.testCaseName} not found")
         }
         val problemEntity = Problem(
@@ -35,6 +36,7 @@ class ProblemService(
     }
 
     fun getProblemDtoById(id: UUID): ProblemDto {
+        //TODO Exception handling
         val problem = problemRepository.findById(id).orElseThrow { IllegalArgumentException("Problem with id $id not found") }
         return ProblemDto(
             name = problem.name,
@@ -45,10 +47,12 @@ class ProblemService(
     }
 
     fun getProblemById(id: UUID): Problem {
+        //TODO Exception handling
         return problemRepository.findById(id).orElseThrow { IllegalArgumentException("Problem with id $id not found") }
     }
 
     fun getProblemIdByTestCaseId(testCaseId: String): UUID {
+        //TODO Exception handling
         return problemRepository.findAll().find { it.testCaseId == testCaseId }?.id
             ?: throw IllegalArgumentException("Problem with testCaseId $testCaseId not found")
     }
