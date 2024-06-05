@@ -7,13 +7,11 @@ import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.server.ResponseStatusException
 import ru.hse.virtual.psychologist.backend.data.entities.Result
 import ru.hse.virtual.psychologist.backend.data.entities.TestCase
-import ru.hse.virtual.psychologist.backend.data.entities.User
 import ru.hse.virtual.psychologist.backend.data.repositories.ProblemRepository
 import ru.hse.virtual.psychologist.backend.data.repositories.TestCaseRepository
 import ru.hse.virtual.psychologist.backend.dtos.ResultApiDto
 import ru.hse.virtual.psychologist.backend.exceptions.user.not.found.UserNotFoundException
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 

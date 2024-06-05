@@ -1,7 +1,5 @@
 package ru.hse.virtual.psychologist.backend.controllers
 
-import org.springframework.data.jpa.domain.AbstractPersistable_.id
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PutMapping
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController
 import ru.hse.virtual.psychologist.backend.dtos.ResultDto
 import ru.hse.virtual.psychologist.backend.dtos.ResultInfoDto
 import ru.hse.virtual.psychologist.backend.services.ResultService
-import ru.hse.virtual.psychologist.backend.services.TestingSystemService
 import java.util.*
 
 @RestController

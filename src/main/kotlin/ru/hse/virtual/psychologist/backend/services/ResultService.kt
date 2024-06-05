@@ -3,7 +3,6 @@ package ru.hse.virtual.psychologist.backend.services
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import ru.hse.virtual.psychologist.backend.data.entities.Result
-import ru.hse.virtual.psychologist.backend.data.entities.User
 import ru.hse.virtual.psychologist.backend.dtos.ResultDto
 import ru.hse.virtual.psychologist.backend.dtos.ResultInfoDto
 import ru.hse.virtual.psychologist.backend.exceptions.user.not.found.UserNotFoundException
