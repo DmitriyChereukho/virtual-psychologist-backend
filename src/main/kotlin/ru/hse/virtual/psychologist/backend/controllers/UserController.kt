@@ -15,7 +15,7 @@ class UserController(
         return userService.getInfo()
     }
 
-    @PutMapping("/update")
+    @PutMapping
     fun updateUserInfo(@RequestBody updRequest: UserInfoUpdateRequest) {
         return userService.updateUser(updRequest)
     }

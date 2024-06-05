@@ -11,6 +11,7 @@ class CrossOriginConfig : WebMvcConfigurer {
     @Override
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
+            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedOriginPatterns("*")
             .allowCredentials(true)
     }
