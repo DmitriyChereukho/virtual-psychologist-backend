@@ -11,7 +11,8 @@ import java.util.*
 @Service
 class ProblemService(
     private val problemRepository: ProblemRepository,
-    private val testCaseRepository: TestCaseRepository
+    private val testCaseRepository: TestCaseRepository,
+    private val userService: UserService
 ) {
     fun createProblem(problem: NewProblemDto) {
         val matchedTestCase = testCaseRepository.findAll().find { it.name == problem.testCaseName }
@@ -33,7 +34,7 @@ class ProblemService(
         return problemRepository.findAll()
     }
 
-    fun getProblemById(id: UUID): ProblemDto {
+    fun getProblemDtoById(id: UUID): ProblemDto {
         val problem = problemRepository.findById(id).orElseThrow { IllegalArgumentException("Problem with id $id not found") }
         return ProblemDto(
             name = problem.name,
@@ -41,5 +42,18 @@ class ProblemService(
             testCaseLink = problem.testCaseLink,
             formLink = problem.formLink
         )
+    }
+
+    fun getProblemById(id: UUID): Problem {
+        return problemRepository.findById(id).orElseThrow { IllegalArgumentException("Problem with id $id not found") }
+    }
+
+    fun getProblemIdByTestCaseId(testCaseId: String): UUID {
+        return problemRepository.findAll().find { it.testCaseId == testCaseId }?.id
+            ?: throw IllegalArgumentException("Problem with testCaseId $testCaseId not found")
+    }
+
+    fun addProblemToUser(id: UUID) {
+        userService.addProblem(id)
     }
 }

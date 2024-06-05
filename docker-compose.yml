@@ -2,7 +2,7 @@
 services:
   postgres:
     container_name: virtual-psychologist-postgres-db
-    image: mirror.gcr.io/postgres
+    image: postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -11,6 +11,6 @@ services:
       - "5432:5432"
   backend:
     container_name: virtual-psychologist-backend
-    image: mirror.gcr.io/dachereukho17/virtual-psychologist-backend:latest
+    image: dachereukho17/virtual-psychologist-backend:latest
     ports:
       - "8080:8080"

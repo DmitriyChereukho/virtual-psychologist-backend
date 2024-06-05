@@ -33,6 +33,10 @@ data class User(
     @Column(name = "birthday")
     val birthday: LocalDate,
 
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    val results: List<Result>,
+
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     val role: Role,

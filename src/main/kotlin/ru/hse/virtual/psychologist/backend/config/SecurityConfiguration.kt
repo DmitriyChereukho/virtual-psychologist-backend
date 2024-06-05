@@ -22,7 +22,7 @@ class SecurityConfiguration(private val authenticationProvider: AuthenticationPr
                 .permitAll()
                 .requestMatchers(HttpMethod.POST, "/problems")
                 .hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/problems")
+                .requestMatchers(HttpMethod.GET, "/problems**")
                 .permitAll()
                 .anyRequest()
                 .fullyAuthenticated()

@@ -10,6 +10,7 @@ import ru.hse.virtual.psychologist.backend.dtos.UserDto
 interface UserDtoToUserEntityMapper {
     @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
     @Mapping(target = "role", expression = "java(ru.hse.virtual.psychologist.backend.enums.Role.CLIENT)")
+    @Mapping(target = "results", expression = "java(java.util.Collections.emptyList())")
     fun map(userDto: UserDto): User
 
     @InheritInverseConfiguration

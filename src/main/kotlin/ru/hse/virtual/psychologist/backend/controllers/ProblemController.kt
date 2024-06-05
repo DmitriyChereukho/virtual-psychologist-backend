@@ -27,6 +27,11 @@ class ProblemController(private val problemService: ProblemService) {
 
     @GetMapping("/{id}")
     fun getProblem(@PathVariable id: UUID): ProblemDto {
-        return problemService.getProblemById(id)
+        return problemService.getProblemDtoById(id)
+    }
+
+    @PutMapping("/{id}")
+    fun buyProblem(@PathVariable id: UUID) {
+        problemService.addProblemToUser(id)
     }
 }
