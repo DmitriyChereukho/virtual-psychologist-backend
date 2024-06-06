@@ -1,4 +1,4 @@
-package ru.hse.virtual.psychologist.backend.exceptions.problems.testcaseid
+package ru.hse.virtual.psychologist.backend.exceptions.userNotFound
 
 import lombok.AllArgsConstructor
 import lombok.Data
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 
 @ControllerAdvice
-class NoTestCaseIdMatchExceptionHandler : ResponseEntityExceptionHandler() {
-    @ExceptionHandler(NoTestCaseIdMatchException::class)
-    protected fun handleNoTestCaseIdMatchException(ex: NoTestCaseIdMatchException): ResponseEntity<NoTestCaseIdMatchExceptionJson> {
+class UserNotFoundExceptionHandler : ResponseEntityExceptionHandler() {
+    @ExceptionHandler(UserNotFoundException::class)
+    protected fun handleUserNotFoundException(): ResponseEntity<UserNotFoundJson> {
         return ResponseEntity(
-            NoTestCaseIdMatchExceptionJson(
+            UserNotFoundJson(
                 "Not found",
-                "There is no problem with testCaseId ${ex.testCaseId}."
+                "There is no user with this email"
             ),
             HttpStatus.NOT_FOUND
         )
@@ -23,7 +23,7 @@ class NoTestCaseIdMatchExceptionHandler : ResponseEntityExceptionHandler() {
 
     @Data
     @AllArgsConstructor
-    data class NoTestCaseIdMatchExceptionJson(
+    data class UserNotFoundJson(
         val error: String,
         val message: String
     )

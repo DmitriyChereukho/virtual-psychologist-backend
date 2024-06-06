@@ -1,4 +1,4 @@
-package ru.hse.virtual.psychologist.backend.exceptions.no.mukhin.respond
+package ru.hse.virtual.psychologist.backend.exceptions.noMukhinRespond
 
 import lombok.AllArgsConstructor
 import lombok.Data

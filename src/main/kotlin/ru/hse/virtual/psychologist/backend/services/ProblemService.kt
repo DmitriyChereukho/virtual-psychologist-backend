@@ -7,7 +7,8 @@ import ru.hse.virtual.psychologist.backend.data.repositories.TestCaseRepository
 import ru.hse.virtual.psychologist.backend.dtos.NewProblemDto
 import ru.hse.virtual.psychologist.backend.dtos.ProblemDto
 import ru.hse.virtual.psychologist.backend.exceptions.problems.id.NoIdMatchException
-import ru.hse.virtual.psychologist.backend.exceptions.problems.testcaseid.NoTestCaseIdMatchException
+import ru.hse.virtual.psychologist.backend.exceptions.problems.testCaseId.NoTestCaseIdMatchException
+import ru.hse.virtual.psychologist.backend.exceptions.testCases.TestCaseNotFoundException
 import java.util.*
 
 @Service
@@ -17,9 +18,8 @@ class ProblemService(
     private val userService: UserService
 ) {
     fun createProblem(problem: NewProblemDto) {
-        //TODO No such test case exception
         val matchedTestCase = testCaseRepository.findAll().find { it.name == problem.testCaseName }
-            ?: throw IllegalArgumentException("Test case with name ${problem.testCaseName} not found")
+            ?: throw TestCaseNotFoundException(problem.testCaseName)
 
         val problemEntity = Problem(
             name = problem.name,

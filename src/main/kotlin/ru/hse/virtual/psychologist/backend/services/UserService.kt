@@ -10,7 +10,7 @@ import ru.hse.virtual.psychologist.backend.dtos.UserInfoUpdateRequest
 import ru.hse.virtual.psychologist.backend.dtos.UserInfoDto
 import ru.hse.virtual.psychologist.backend.exceptions.email.EmailExistsException
 import ru.hse.virtual.psychologist.backend.exceptions.phone.PhoneExistsException
-import ru.hse.virtual.psychologist.backend.exceptions.user.not.found.UserNotFoundException
+import ru.hse.virtual.psychologist.backend.exceptions.userNotFound.UserNotFoundException
 import ru.hse.virtual.psychologist.backend.mappers.UserEntityToUserInfoDtoImpl
 import java.util.*
 
