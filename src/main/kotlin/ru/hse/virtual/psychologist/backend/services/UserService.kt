@@ -101,4 +101,8 @@ class UserService(
 
         return res
     }
+
+    fun getUserById(id: UUID): User {
+        return userRepository.findById(id).orElseThrow{ UserNotFoundException() }
+    }
 }
