@@ -54,7 +54,7 @@ class ResultService(
             createdAt = result.createdAt,
             duration = result.duration,
             nodes = objectMapper.readTree(
-                result.nodes
+                result.nodes?: "[]"
             )
         )
     }
