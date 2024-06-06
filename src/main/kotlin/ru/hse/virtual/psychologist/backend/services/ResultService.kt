@@ -22,7 +22,7 @@ class ResultService(
         for (result in user.results) {
             val newResult =
                 testingSystemService.getResultForUser(problemService.getProblemById(result.problemId).testCaseId)
-            newResults.add(newResult)
+            newResults.add(newResult.copy(id = result.id))
         }
 
         userService.updateResults(newResults)

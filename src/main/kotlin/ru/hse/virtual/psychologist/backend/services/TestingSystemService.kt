@@ -53,7 +53,13 @@ class TestingSystemService(
         val user = userService.getThisSessionUser()
 
         val resultDtoForCurrentUser = resultApiDtos?.find { it.email == user.email }
-            ?: throw NoResultsException()
+            ?: return Result(
+                id = UUID.randomUUID(),
+                problemId = problemService.getProblemIdByTestCaseId(testCaseId),
+                nodes = null,
+                duration = null,
+                createdAt = null
+            )
 
         val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
         val resultDate = resultDtoForCurrentUser.createdAt.split(",")[0]
