@@ -1,4 +1,4 @@
-package ru.hse.virtual.psychologist.backend.exceptions.problems.testCaseId
+package ru.hse.virtual.psychologist.backend.exceptions.problemNotFound.byTestCaseId
 
 import lombok.AllArgsConstructor
 import lombok.Data

@@ -1,4 +1,4 @@
-package ru.hse.virtual.psychologist.backend.exceptions.testCases
+package ru.hse.virtual.psychologist.backend.exceptions.testCaseNotFound
 
 import lombok.AllArgsConstructor
 import lombok.Data

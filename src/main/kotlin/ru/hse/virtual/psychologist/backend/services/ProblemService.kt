@@ -6,9 +6,9 @@ import ru.hse.virtual.psychologist.backend.data.repositories.ProblemRepository
 import ru.hse.virtual.psychologist.backend.data.repositories.TestCaseRepository
 import ru.hse.virtual.psychologist.backend.dtos.NewProblemDto
 import ru.hse.virtual.psychologist.backend.dtos.ProblemDto
-import ru.hse.virtual.psychologist.backend.exceptions.problems.id.NoIdMatchException
-import ru.hse.virtual.psychologist.backend.exceptions.problems.testCaseId.NoTestCaseIdMatchException
-import ru.hse.virtual.psychologist.backend.exceptions.testCases.TestCaseNotFoundException
+import ru.hse.virtual.psychologist.backend.exceptions.problemNotFound.byId.NoIdMatchException
+import ru.hse.virtual.psychologist.backend.exceptions.problemNotFound.byTestCaseId.NoTestCaseIdMatchException
+import ru.hse.virtual.psychologist.backend.exceptions.testCaseNotFound.TestCaseNotFoundException
 import java.util.*
 
 @Service

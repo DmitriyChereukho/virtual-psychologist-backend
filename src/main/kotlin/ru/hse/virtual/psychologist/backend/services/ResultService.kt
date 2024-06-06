@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service
 import ru.hse.virtual.psychologist.backend.data.entities.Result
 import ru.hse.virtual.psychologist.backend.dtos.ResultDto
 import ru.hse.virtual.psychologist.backend.dtos.ResultInfoDto
-import ru.hse.virtual.psychologist.backend.exceptions.results.NoResultsException
+import ru.hse.virtual.psychologist.backend.exceptions.resultsNotFound.NoResultsException
 import java.util.*
 
 @Service

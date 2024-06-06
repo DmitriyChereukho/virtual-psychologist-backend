@@ -1,4 +1,4 @@
-package ru.hse.virtual.psychologist.backend.exceptions.problems.id
+package ru.hse.virtual.psychologist.backend.exceptions.problemNotFound.byId
 
 import java.util.UUID
 

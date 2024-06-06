@@ -1,4 +1,4 @@
-package ru.hse.virtual.psychologist.backend.exceptions.phone
+package ru.hse.virtual.psychologist.backend.exceptions.mukhinNoRespond
 
 import lombok.AllArgsConstructor
 import lombok.Data
@@ -9,21 +9,21 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 
 @ControllerAdvice
-class PhoneExistsExceptionHandler : ResponseEntityExceptionHandler() {
-    @ExceptionHandler(PhoneExistsException::class)
-    protected fun handlePhoneExistsException(ex: PhoneExistsException): ResponseEntity<PhoneExceptionJson> {
+class NoMukhinRespondExceptionHandler : ResponseEntityExceptionHandler() {
+    @ExceptionHandler(NoMukhinRespondException::class)
+    protected fun handleNoMukhinRespondException(): ResponseEntity<NoMukhinRespondExceptionJson> {
         return ResponseEntity(
-            PhoneExceptionJson(
-                "Conflict",
-                "There already is an account registered on number ${ex.phone}."
+            NoMukhinRespondExceptionJson(
+                "Service unavailable",
+                "No response from testing system."
             ),
-            HttpStatus.CONFLICT
+            HttpStatus.SERVICE_UNAVAILABLE
         )
     }
 
     @Data
     @AllArgsConstructor
-    data class PhoneExceptionJson(
+    data class NoMukhinRespondExceptionJson(
         val error: String,
         val message: String
     )

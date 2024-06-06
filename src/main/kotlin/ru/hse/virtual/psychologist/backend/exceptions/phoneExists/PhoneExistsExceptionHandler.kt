@@ -1,4 +1,4 @@
-package ru.hse.virtual.psychologist.backend.exceptions.results
+package ru.hse.virtual.psychologist.backend.exceptions.phoneExists
 
 import lombok.AllArgsConstructor
 import lombok.Data
@@ -9,21 +9,21 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 
 @ControllerAdvice
-class NoResultsExceptionHandler : ResponseEntityExceptionHandler() {
-    @ExceptionHandler(NoResultsException::class)
-    protected fun handleNoResultsException(): ResponseEntity<NoResultsExceptionJson> {
+class PhoneExistsExceptionHandler : ResponseEntityExceptionHandler() {
+    @ExceptionHandler(PhoneExistsException::class)
+    protected fun handlePhoneExistsException(ex: PhoneExistsException): ResponseEntity<PhoneExceptionJson> {
         return ResponseEntity(
-            NoResultsExceptionJson(
-                "Not found",
-                "There is no results for this user."
+            PhoneExceptionJson(
+                "Conflict",
+                "There already is an account registered on number ${ex.phone}."
             ),
-            HttpStatus.NOT_FOUND
+            HttpStatus.CONFLICT
         )
     }
 
     @Data
     @AllArgsConstructor
-    data class NoResultsExceptionJson(
+    data class PhoneExceptionJson(
         val error: String,
         val message: String
     )

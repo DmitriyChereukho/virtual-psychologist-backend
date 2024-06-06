@@ -6,8 +6,8 @@ import ru.hse.virtual.psychologist.backend.data.entities.Result
 import ru.hse.virtual.psychologist.backend.data.entities.TestCase
 import ru.hse.virtual.psychologist.backend.data.repositories.TestCaseRepository
 import ru.hse.virtual.psychologist.backend.dtos.ResultApiDto
-import ru.hse.virtual.psychologist.backend.exceptions.noMukhinRespond.NoMukhinRespondException
-import ru.hse.virtual.psychologist.backend.exceptions.results.NoResultsException
+import ru.hse.virtual.psychologist.backend.exceptions.mukhinNoRespond.NoMukhinRespondException
+import ru.hse.virtual.psychologist.backend.exceptions.resultsNotFound.NoResultsException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*

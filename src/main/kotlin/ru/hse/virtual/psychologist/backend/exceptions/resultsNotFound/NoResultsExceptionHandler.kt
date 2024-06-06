@@ -1,4 +1,4 @@
-package ru.hse.virtual.psychologist.backend.exceptions.problems.id
+package ru.hse.virtual.psychologist.backend.exceptions.resultsNotFound
 
 import lombok.AllArgsConstructor
 import lombok.Data
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 
 @ControllerAdvice
-class NoIdMatchExceptionHandler : ResponseEntityExceptionHandler() {
-    @ExceptionHandler(NoIdMatchException::class)
-    protected fun handleNoIdMatchException(ex: NoIdMatchException): ResponseEntity<NoIdMatchExceptionJson> {
+class NoResultsExceptionHandler : ResponseEntityExceptionHandler() {
+    @ExceptionHandler(NoResultsException::class)
+    protected fun handleNoResultsException(): ResponseEntity<NoResultsExceptionJson> {
         return ResponseEntity(
-            NoIdMatchExceptionJson(
+            NoResultsExceptionJson(
                 "Not found",
-                "There is no problem with id ${ex.id}."
+                "There is no results for this user."
             ),
             HttpStatus.NOT_FOUND
         )
@@ -23,7 +23,7 @@ class NoIdMatchExceptionHandler : ResponseEntityExceptionHandler() {
 
     @Data
     @AllArgsConstructor
-    data class NoIdMatchExceptionJson(
+    data class NoResultsExceptionJson(
         val error: String,
         val message: String
     )

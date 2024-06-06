@@ -1,4 +1,4 @@
-package ru.hse.virtual.psychologist.backend.exceptions.email
+package ru.hse.virtual.psychologist.backend.exceptions.emailExists
 
 import lombok.AllArgsConstructor
 import lombok.Data
