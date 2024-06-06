@@ -2,7 +2,7 @@ package ru.hse.virtual.psychologist.backend.controllers
 
 import org.springframework.web.bind.annotation.*
 import ru.hse.virtual.psychologist.backend.dtos.*
-import ru.hse.virtual.psychologist.backend.mappers.UserEntityToUserListDtoImpl
+import ru.hse.virtual.psychologist.backend.mappers.UserEntityToUserInfoDtoImpl
 import ru.hse.virtual.psychologist.backend.services.ProblemService
 import ru.hse.virtual.psychologist.backend.services.UserService
 import java.util.UUID
@@ -12,7 +12,7 @@ import java.util.UUID
 class UserController(
     private val userService: UserService,
     private val problemService: ProblemService,
-    private val userEntityToUserListDtoImpl: UserEntityToUserListDtoImpl
+    private val userEntityToUserInfoDto: UserEntityToUserInfoDtoImpl
 ) {
     @GetMapping("/info")
     fun getUserInfo(): UserInfoDto {
@@ -30,13 +30,13 @@ class UserController(
     }
 
     @GetMapping("/list/{id}")
-    fun getUserAdminInfo(@PathVariable id: UUID): Pair<UserListDto, List<ProblemDto>> {
+    fun getUserAdminInfo(@PathVariable id: UUID): Pair<UserInfoDto, List<ProblemDto>> {
         val user = userService.getUserById(id)
         val problems = mutableListOf<ProblemDto>()
 
         for (result in user.results)
             problems.add(problemService.getProblemDtoById(result.problemId))
 
-        return Pair(userEntityToUserListDtoImpl.map(user), problems)
+        return Pair(userEntityToUserInfoDto.map(user), problems)
     }
 }
