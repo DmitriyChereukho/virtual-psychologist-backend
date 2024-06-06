@@ -29,18 +29,24 @@ class UserService(
     }
 
     fun createUser(user: User): User {
-        if (findByEmail(user.email) != null) throw EmailExistsException()
+        if (findByEmail(user.email) != null) throw EmailExistsException(user.email)
 
+        //TODO Сделать вывод ошибки с показом телефона, как сделано с имейлом
         if (findByPhoneNum(user.phoneNum) != null) throw PhoneExistsException()
 
         return userRepository.save(user.copy(password = encoder.encode(user.password)))
     }
 
-    fun updateUser(updRequest: UserInfoUpdateRequest) {
-        //TODO Make it separated function
-        val oldUser = findByEmail(
+    fun getThisSessionUser(): User {
+        val user = findByEmail(
             SecurityContextHolder.getContext().authentication.name
         ) ?: throw UserNotFoundException()
+
+        return user
+    }
+
+    fun updateUser(updRequest: UserInfoUpdateRequest) {
+        val oldUser = getThisSessionUser()
 
         userRepository.save(
             oldUser.copy(
@@ -61,19 +67,24 @@ class UserService(
     }
 
     fun addProblem(id: UUID) {
-        val user = findByEmail(
-            SecurityContextHolder.getContext().authentication.name
-        ) ?: throw UserNotFoundException()
+        val user = getThisSessionUser()
+
         val updatedUser = user.copy(
-            results = user.results + Result(problemId = id, nodes = null, id = UUID.randomUUID(), createdAt = null, duration = null)
+            results = user.results + Result(
+                problemId = id,
+                nodes = null,
+                id = UUID.randomUUID(),
+                createdAt = null,
+                duration = null
+            )
         )
+
         userRepository.save(updatedUser)
     }
 
     fun updateResults(results: List<Result>) {
-        val user = findByEmail(
-            SecurityContextHolder.getContext().authentication.name
-        ) ?: throw UserNotFoundException()
+        val user = getThisSessionUser()
+
         val updatedUser = user.copy(results = results)
         userRepository.save(updatedUser)
     }

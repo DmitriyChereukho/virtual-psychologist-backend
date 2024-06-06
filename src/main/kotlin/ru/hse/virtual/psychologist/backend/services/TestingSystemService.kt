@@ -1,15 +1,13 @@
 package ru.hse.virtual.psychologist.backend.services
 
-import org.springframework.http.HttpStatus
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
-import org.springframework.web.server.ResponseStatusException
 import ru.hse.virtual.psychologist.backend.data.entities.Result
 import ru.hse.virtual.psychologist.backend.data.entities.TestCase
 import ru.hse.virtual.psychologist.backend.data.repositories.TestCaseRepository
 import ru.hse.virtual.psychologist.backend.dtos.ResultApiDto
-import ru.hse.virtual.psychologist.backend.exceptions.user.not.found.UserNotFoundException
+import ru.hse.virtual.psychologist.backend.exceptions.no.mukhin.respond.NoMukhinRespondException
+import ru.hse.virtual.psychologist.backend.exceptions.results.NoResultsException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -34,7 +32,7 @@ class TestingSystemService(
             .block()
 
         testCases?.forEach { testCaseRepository.save(it) }
-            ?: throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR)
+            ?: throw NoMukhinRespondException()
 
         return testCases
     }
@@ -50,13 +48,11 @@ class TestingSystemService(
             .bodyToFlux(ResultApiDto::class.java)
             .collectList()
             .block()
-        val user = userService.findByEmail(
-            SecurityContextHolder.getContext().authentication.name
-        ) ?: throw UserNotFoundException()
+
+        val user = userService.getThisSessionUser()
 
         val resultDtoForCurrentUser = resultApiDtos?.find { it.email == user.email }
-            //TODO Exception handling
-            ?: throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR)
+            ?: throw NoResultsException()
 
         val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
         val resultDate = resultDtoForCurrentUser.createdAt.split(",")[0]

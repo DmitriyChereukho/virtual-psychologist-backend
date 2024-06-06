@@ -1,4 +1,4 @@
-package ru.hse.virtual.psychologist.backend.exceptions.email
+package ru.hse.virtual.psychologist.backend.exceptions.problems.id
 
 import lombok.AllArgsConstructor
 import lombok.Data
@@ -9,20 +9,21 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 
 @ControllerAdvice
-class EmailExistsExceptionHandler : ResponseEntityExceptionHandler() {
-    @ExceptionHandler(EmailExistsException::class)
-    protected fun handleEmailExistsException(ex: EmailExistsException): ResponseEntity<EmailExceptionJson> {
+class NoIdMatchExceptionHandler : ResponseEntityExceptionHandler() {
+    @ExceptionHandler(NoIdMatchException::class)
+    protected fun handleNoIdMatchException(ex: NoIdMatchException): ResponseEntity<NoIdMatchExceptionJson> {
         return ResponseEntity(
-            EmailExceptionJson(
-                "Conflict",
-                "There already is an account registered on address ${ex.email}."
-            ), HttpStatus.CONFLICT
+            NoIdMatchExceptionJson(
+                "Not found",
+                "There is no problem with id ${ex.id}."
+            ),
+            HttpStatus.NOT_FOUND
         )
     }
 
     @Data
     @AllArgsConstructor
-    data class EmailExceptionJson(
+    data class NoIdMatchExceptionJson(
         val error: String,
         val message: String
     )

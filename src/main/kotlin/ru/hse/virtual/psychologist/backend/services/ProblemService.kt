@@ -15,11 +15,10 @@ class ProblemService(
     private val userService: UserService
 ) {
     fun createProblem(problem: NewProblemDto) {
+        //TODO No such test case exception
         val matchedTestCase = testCaseRepository.findAll().find { it.name == problem.testCaseName }
-        if (matchedTestCase == null) {
-            //TODO Exception handling
-            throw IllegalArgumentException("Test case with name ${problem.testCaseName} not found")
-        }
+            ?: throw IllegalArgumentException("Test case with name ${problem.testCaseName} not found")
+
         val problemEntity = Problem(
             name = problem.name,
             description = problem.description,
@@ -28,6 +27,7 @@ class ProblemService(
             formLink = problem.formLink,
             id = UUID.randomUUID()
         )
+
         problemRepository.save(problemEntity)
     }
 
@@ -36,8 +36,10 @@ class ProblemService(
     }
 
     fun getProblemDtoById(id: UUID): ProblemDto {
-        //TODO Exception handling
-        val problem = problemRepository.findById(id).orElseThrow { IllegalArgumentException("Problem with id $id not found") }
+        //TODO No problem with id exception handling
+        val problem =
+            problemRepository.findById(id).orElseThrow { IllegalArgumentException("Problem with id $id not found") }
+
         return ProblemDto(
             name = problem.name,
             description = problem.description,
@@ -47,12 +49,12 @@ class ProblemService(
     }
 
     fun getProblemById(id: UUID): Problem {
-        //TODO Exception handling
+        //TODO No problem with id exception handling
         return problemRepository.findById(id).orElseThrow { IllegalArgumentException("Problem with id $id not found") }
     }
 
     fun getProblemIdByTestCaseId(testCaseId: String): UUID {
-        //TODO Exception handling
+        //TODO No problem with such test case id exception handling
         return problemRepository.findAll().find { it.testCaseId == testCaseId }?.id
             ?: throw IllegalArgumentException("Problem with testCaseId $testCaseId not found")
     }

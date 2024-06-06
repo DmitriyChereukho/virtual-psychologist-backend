@@ -1,3 +1,3 @@
 package ru.hse.virtual.psychologist.backend.exceptions.email
 
-class EmailExistsException : RuntimeException()
+class EmailExistsException(val email : String) : RuntimeException()
