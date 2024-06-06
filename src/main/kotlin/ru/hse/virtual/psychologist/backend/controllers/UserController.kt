@@ -30,13 +30,13 @@ class UserController(
     }
 
     @GetMapping("/list/{id}")
-    fun getUserAdminInfo(@PathVariable id: UUID): Pair<UserInfoDto, List<ProblemDto>> {
+    fun getUserAdminInfo(@PathVariable id: UUID): Pair<UserInfoDto, List<String>> {
         val user = userService.getUserById(id)
-        val problems = mutableListOf<ProblemDto>()
+        val problems = mutableListOf<String>()
 
         for (result in user.results)
-            problems.add(problemService.getProblemDtoById(result.problemId))
+            problems.add(problemService.getProblemDtoById(result.problemId).name)
 
-        return Pair(userEntityToUserInfoDto.map(user), problems)
+        return Pair(userEntityToUserInfoDto.map(user), problems.sorted())
     }
 }
