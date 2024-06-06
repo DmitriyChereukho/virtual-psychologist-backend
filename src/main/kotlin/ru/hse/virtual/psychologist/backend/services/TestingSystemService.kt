@@ -1,5 +1,6 @@
 package ru.hse.virtual.psychologist.backend.services
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import ru.hse.virtual.psychologist.backend.data.entities.Result
@@ -57,10 +58,12 @@ class TestingSystemService(
         val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
         val resultDate = resultDtoForCurrentUser.createdAt.split(",")[0]
 
+        val objectMapper = ObjectMapper()
+
         return Result(
             id = UUID.randomUUID(),
             problemId = problemService.getProblemIdByTestCaseId(testCaseId),
-            nodes = resultDtoForCurrentUser.nodes,
+            nodes = objectMapper.writeValueAsString(resultDtoForCurrentUser.nodes),
             duration = resultDtoForCurrentUser.duration,
             createdAt = LocalDate.parse(resultDate, formatter)
         )

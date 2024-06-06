@@ -1,5 +1,6 @@
 package ru.hse.virtual.psychologist.backend.services
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.stereotype.Service
 import ru.hse.virtual.psychologist.backend.data.entities.Result
 import ru.hse.virtual.psychologist.backend.dtos.ResultDto
@@ -16,12 +17,12 @@ class ResultService(
     fun refreshResultsForCurrentUser() {
         val user = userService.getThisSessionUser()
 
-        val newResults: List<Result> = emptyList()
+        val newResults: MutableList<Result> = ArrayList()
 
         for (result in user.results) {
             val newResult =
                 testingSystemService.getResultForUser(problemService.getProblemById(result.problemId).testCaseId)
-            newResults.plus(newResult)
+            newResults.add(newResult)
         }
 
         userService.updateResults(newResults)
@@ -46,12 +47,15 @@ class ResultService(
 
         val problem = problemService.getProblemById(result.problemId)
 
+        val objectMapper = ObjectMapper()
+
         return ResultInfoDto(
             name = problem.name,
-            //TODO На кой нам тут обработка нулль-полей? мы вроде бы и так раньше проверяем не пустой ли результат (пока сюда не делал эксепшена)
-            createdAt = result.createdAt ?: throw IllegalArgumentException("Test has not been passed yet"),
-            duration = result.duration ?: throw IllegalArgumentException("Test has not been passed yet"),
-            nodes = result.nodes ?: throw IllegalArgumentException("Test has not been passed yet")
+            createdAt = result.createdAt,
+            duration = result.duration,
+            nodes = objectMapper.readTree(
+                result.nodes
+            )
         )
     }
 }

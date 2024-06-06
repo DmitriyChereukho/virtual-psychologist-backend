@@ -1,5 +1,7 @@
 package ru.hse.virtual.psychologist.backend.dtos
 
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.databind.JsonNode
 import lombok.Builder
 import lombok.Data
 
@@ -11,6 +13,7 @@ data class ResultApiDto(
     val birthday: String,
     val age: Int,
     val email: String,
+    @JsonProperty("phone")
     val phoneNum: String,
     val address: String,
     val timeStart: String,
@@ -19,5 +22,5 @@ data class ResultApiDto(
     val duration: String,
     val status: Int,
     val score: Int,
-    val nodes: String
+    val nodes: JsonNode,
 )
