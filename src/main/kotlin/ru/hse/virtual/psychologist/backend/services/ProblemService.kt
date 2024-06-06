@@ -6,6 +6,8 @@ import ru.hse.virtual.psychologist.backend.data.repositories.ProblemRepository
 import ru.hse.virtual.psychologist.backend.data.repositories.TestCaseRepository
 import ru.hse.virtual.psychologist.backend.dtos.NewProblemDto
 import ru.hse.virtual.psychologist.backend.dtos.ProblemDto
+import ru.hse.virtual.psychologist.backend.exceptions.problems.id.NoIdMatchException
+import ru.hse.virtual.psychologist.backend.exceptions.problems.testcaseid.NoTestCaseIdMatchException
 import java.util.*
 
 @Service
@@ -36,9 +38,7 @@ class ProblemService(
     }
 
     fun getProblemDtoById(id: UUID): ProblemDto {
-        //TODO No problem with id exception handling
-        val problem =
-            problemRepository.findById(id).orElseThrow { IllegalArgumentException("Problem with id $id not found") }
+        val problem = problemRepository.findById(id).orElseThrow { NoIdMatchException(id) }
 
         return ProblemDto(
             name = problem.name,
@@ -49,14 +49,12 @@ class ProblemService(
     }
 
     fun getProblemById(id: UUID): Problem {
-        //TODO No problem with id exception handling
-        return problemRepository.findById(id).orElseThrow { IllegalArgumentException("Problem with id $id not found") }
+        return problemRepository.findById(id).orElseThrow { NoIdMatchException(id) }
     }
 
     fun getProblemIdByTestCaseId(testCaseId: String): UUID {
-        //TODO No problem with such test case id exception handling
         return problemRepository.findAll().find { it.testCaseId == testCaseId }?.id
-            ?: throw IllegalArgumentException("Problem with testCaseId $testCaseId not found")
+            ?: throw NoTestCaseIdMatchException(testCaseId)
     }
 
     fun addProblemToUser(id: UUID) {

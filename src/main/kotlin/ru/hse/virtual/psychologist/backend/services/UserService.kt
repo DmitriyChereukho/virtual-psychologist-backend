@@ -31,8 +31,7 @@ class UserService(
     fun createUser(user: User): User {
         if (findByEmail(user.email) != null) throw EmailExistsException(user.email)
 
-        //TODO Сделать вывод ошибки с показом телефона, как сделано с имейлом
-        if (findByPhoneNum(user.phoneNum) != null) throw PhoneExistsException()
+        if (findByPhoneNum(user.phoneNum) != null) throw PhoneExistsException(user.phoneNum)
 
         return userRepository.save(user.copy(password = encoder.encode(user.password)))
     }

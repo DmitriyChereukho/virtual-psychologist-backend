@@ -1,3 +1,3 @@
 package ru.hse.virtual.psychologist.backend.exceptions.problems.testcaseid
 
-class NoTestCaseIdMatchException : RuntimeException()
+class NoTestCaseIdMatchException(val testCaseId: String) : RuntimeException()
