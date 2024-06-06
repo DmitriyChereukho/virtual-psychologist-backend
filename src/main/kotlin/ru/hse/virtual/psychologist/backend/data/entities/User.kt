@@ -43,5 +43,5 @@ data class User(
 
     @Id
     @Column(name = "id")
-    private val id: UUID
+    val id: UUID
 )

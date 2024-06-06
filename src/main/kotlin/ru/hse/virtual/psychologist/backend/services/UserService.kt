@@ -8,10 +8,13 @@ import ru.hse.virtual.psychologist.backend.data.entities.User
 import ru.hse.virtual.psychologist.backend.data.repositories.UserRepository
 import ru.hse.virtual.psychologist.backend.dtos.UserInfoUpdateRequest
 import ru.hse.virtual.psychologist.backend.dtos.UserInfoDto
+import ru.hse.virtual.psychologist.backend.dtos.UserListDto
+import ru.hse.virtual.psychologist.backend.enums.Role
 import ru.hse.virtual.psychologist.backend.exceptions.emailExists.EmailExistsException
 import ru.hse.virtual.psychologist.backend.exceptions.phoneExists.PhoneExistsException
 import ru.hse.virtual.psychologist.backend.exceptions.userNotFound.UserNotFoundException
 import ru.hse.virtual.psychologist.backend.mappers.UserEntityToUserInfoDtoImpl
+import ru.hse.virtual.psychologist.backend.mappers.UserEntityToUserListDtoImpl
 import java.util.*
 
 @Service
@@ -19,6 +22,7 @@ class UserService(
     private val userRepository: UserRepository,
     private val encoder: PasswordEncoder,
     private val userEntityToUserInfoDto: UserEntityToUserInfoDtoImpl,
+    private val userEntityToUserListDto: UserEntityToUserListDtoImpl
 ) {
     fun findByEmail(email: String): User? {
         return userRepository.findAll().find { it.email == email }
@@ -86,5 +90,19 @@ class UserService(
 
         val updatedUser = user.copy(results = results)
         userRepository.save(updatedUser)
+    }
+
+    fun getUsers(): List<UserListDto> {
+        val users = userRepository.findAll().filter { it.role == Role.CLIENT }
+        val res = mutableListOf<UserListDto>()
+
+        for (user in users)
+            res.add(userEntityToUserListDto.map(user))
+
+        return res
+    }
+
+    fun getUserById(id: UUID): User {
+        return userRepository.findById(id).orElseThrow{ UserNotFoundException() }
     }
 }
