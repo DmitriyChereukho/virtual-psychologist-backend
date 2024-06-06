@@ -4,6 +4,6 @@ CREATE TABLE results (
     created_at DATE,
     duration VARCHAR(255),
     nodes VARCHAR(255),
-    user_id UUID not null,
+    user_id UUID,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
