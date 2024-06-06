@@ -1,4 +1,4 @@
-package ru.hse.virtual.psychologist.backend.exceptions.phone
+package ru.hse.virtual.psychologist.backend.exceptions.emailExists
 
 import lombok.AllArgsConstructor
 import lombok.Data
@@ -9,21 +9,20 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 
 @ControllerAdvice
-class PhoneExistsExceptionHandler : ResponseEntityExceptionHandler() {
-    @ExceptionHandler(PhoneExistsException::class)
-    protected fun handlePhoneExistsException(): ResponseEntity<PhoneExceptionJson> {
+class EmailExistsExceptionHandler : ResponseEntityExceptionHandler() {
+    @ExceptionHandler(EmailExistsException::class)
+    protected fun handleEmailExistsException(ex: EmailExistsException): ResponseEntity<EmailExceptionJson> {
         return ResponseEntity(
-            PhoneExceptionJson(
+            EmailExceptionJson(
                 "Conflict",
-                "There already is an account registered on this phone number."
-            ),
-            HttpStatus.CONFLICT
+                "There already is an account registered on address ${ex.email}."
+            ), HttpStatus.CONFLICT
         )
     }
 
     @Data
     @AllArgsConstructor
-    data class PhoneExceptionJson(
+    data class EmailExceptionJson(
         val error: String,
         val message: String
     )
