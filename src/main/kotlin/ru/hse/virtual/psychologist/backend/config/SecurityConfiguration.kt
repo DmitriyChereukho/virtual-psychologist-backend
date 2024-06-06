@@ -24,6 +24,8 @@ class SecurityConfiguration(private val authenticationProvider: AuthenticationPr
                 .hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/problems**")
                 .permitAll()
+                .requestMatchers(HttpMethod.GET, "/user/list")
+                .hasRole("ADMIN")
                 .anyRequest()
                 .fullyAuthenticated()
         }

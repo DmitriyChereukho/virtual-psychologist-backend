@@ -3,6 +3,7 @@ package ru.hse.virtual.psychologist.backend.controllers
 import org.springframework.web.bind.annotation.*
 import ru.hse.virtual.psychologist.backend.dtos.UserInfoUpdateRequest
 import ru.hse.virtual.psychologist.backend.dtos.UserInfoDto
+import ru.hse.virtual.psychologist.backend.dtos.UserListDto
 import ru.hse.virtual.psychologist.backend.services.UserService
 
 @RestController
@@ -18,5 +19,10 @@ class UserController(
     @PutMapping
     fun updateUserInfo(@RequestBody updRequest: UserInfoUpdateRequest) {
         return userService.updateUser(updRequest)
+    }
+
+    @GetMapping("/list")
+    fun getUsersList(): List<UserListDto> {
+        return userService.getUsers()
     }
 }
